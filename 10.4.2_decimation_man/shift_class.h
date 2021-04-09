@@ -26,16 +26,15 @@ public:
     }
     void operator << (dataType din){
         SHIFT:for(int i=NUM_REGS-1;i>=0;i--){
-        if(en)
-        if(sync_rst)
-            regs[i] = 0;
-        else if(ld)
-            regs[i] = load_data[i];
-        else
-        if(i==0)
-            regs[i] = din;
-        else
-            regs[i] = regs[i-1];
+            if(en)
+            if(sync_rst)
+                regs[i] = 0;
+            else if(ld)
+                regs[i] = load_data[i];
+            else if(i==0)
+                regs[i] = din;
+            else
+                regs[i] = regs[i-1];
         }
     }
     dataType operator [](int i){
