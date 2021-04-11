@@ -59,7 +59,7 @@ int RATE : decimation rate
 4 filter taps
 decimation rate = 2
 
-```cpp=
+```cpp
 #include <ac_channel.h>
 #include "shift_class.h"
 #include "fir_filter.h"
@@ -89,7 +89,7 @@ Output Rate = Input Rate * Decimation Rate
    通過example 157中所示的純算法實現，可以最好地理解這一點。由於每個函數調用只能讀取一個值，因此該example必須以input rate進行pipeline處理。 每隔一個調用有條件地寫入output。 這可能是一種低效的實現方式，因為當“ cnt”等於1時需要完整的MAC(Multiplier-Accumulator)計算，並且以intput rate對它進行pipeline處理。當“cnt”等於零時，數據將被移位。
    
 
-```cpp=
+```cpp
 #include <ac_channel.h>
 #include <ac_fixed.h>
 #include "shift_class.h"
@@ -122,7 +122,7 @@ Phase1: y[5]=h[0]*regs[0]+h[1]*regs[1]+temp
 
 example 158給出了一個4 tap decimation filter，該filter手動編碼跨clock cycle的共享。 假設此example的input data rate為每個clock一個採樣。 與example 155不同，此example使用II = 1進行pipeline處理，並根據內部計數有條件地寫入output。 通過在每個stage手動計算filter的一部分，可以將共享編碼到設計中。
 
-```cpp=
+```cpp
 #include <ac_channel.h>
 #include "shift_class.h"
 #include "fir_filter.h"
@@ -161,7 +161,7 @@ Design constraints:
 example 158展示了如何基於input和output rate顯示共享資源。 兩種設計的decimation rate經過硬編碼，input rate為1sample/clock 或II = 1。 如果intput rate不是1 sample/clock，但是必須仍以II = 1進行流水線設計，則必須進一步改進設計以基於input output rate之比來顯示共享資源。 在single block設計中執行multi-stage decimation時，以這種方式進行編碼的原因變得顯而易見。 example 159展示了一種手動方法，對4 tap decimation filter類別進行decimate by 2，但input rate 為2。 在後面的部分中討論multi-stage decimation時，將reuse該類。
 
 Example 159 Decimation Class for Decimate by 2, Input Rate = 2
-```cpp=
+```cpp
 #ifndef _DEC2_H
 #define _DEC2_H
 #include <ac_fixed.h>
@@ -203,7 +203,7 @@ public:
 
 
 
-```cpp=
+```cpp
 #include <ac_channel.h>
 #include "shift_class.h"
 #include "fir_filter.h"
