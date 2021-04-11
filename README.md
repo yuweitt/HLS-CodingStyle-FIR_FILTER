@@ -10,7 +10,7 @@ HLS Coding Style Decimation/Interpolation/Multi-stage FIR
 ## Algorithmic Decimation(算法抽取)
 在進行更抽象的編碼時，設計高效的抽取濾波器的關鍵是確保以較低的down sample對設計進行pipeline的處理，同時以原始速率讀取數據。 這樣可以安排在多個時鐘週期之間共享操作，從而最大程度地減少了面積。 示例155顯示了抽取濾波器的模板化實現。 讀者在這一點上應該熟悉模板化，它允許構建高度可重用的設計。 此處介紹的抽取FIR也將在以後的部分中使用。
 
-```cpp=
+```cpp
 #include <ac_fixed.h>
 #include <ac_channel.h>
 #include "shift_class.h"
